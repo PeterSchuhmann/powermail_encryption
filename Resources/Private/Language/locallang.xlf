@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2018-10-05T11:00:01Z" product-name="powermail_encryption">
+		<header/>
+		<body>
+			<trans-unit id="tx_powermailencryption_domain_model_data">
+				<source>Data</source>
+			</trans-unit>
+			<trans-unit id="tx_powermailencryption_domain_model_data.subject">
+				<source>Subject</source>
+			</trans-unit>
+			<trans-unit id="tx_powermailencryption_domain_model_data.data">
+				<source>Data</source>
+			</trans-unit>
+			<trans-unit id="tx_powermailencryption_domain_model_data.form">
+				<source>Form</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

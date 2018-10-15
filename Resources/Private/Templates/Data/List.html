@@ -1,0 +1,34 @@
+
+<f:layout name="Default" />
+
+This Template is responsible for creating a table of domain objects.
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Templates:
+        List.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="content">
+<h1>Listing for Data</h1>
+
+<f:link.action action="export">CSV-Export</f:link.action><br />
+
+<table  class="tx_powermailencryption" >
+	<tr>
+		<th><f:translate key="tx_powermailencryption_domain_model_data.subject" /></th>
+		<th><f:translate key="tx_powermailencryption_domain_model_data.crdate" /></th>
+	</tr>
+
+	<f:for each="{datas}" as="data">
+		<tr>
+			<td><f:link.action action="show" arguments="{data : data}"> {data.subject}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{data : data}"> <f:format.date date="{data.crdate}" format="d.m.Y H:i:s" /></f:link.action></td>
+		</tr>
+	</f:for>
+</table>
+
+</f:section>

@@ -1,0 +1,35 @@
+
+ # Module configuration
+module.tx_powermailencryption {
+	persistence {
+		storagePid = {$module.tx_powermailencryption.persistence.storagePid}
+	}
+	view {
+		templateRootPath = {$module.tx_powermailencryption.view.templateRootPath}
+		partialRootPath = {$module.tx_powermailencryption.view.partialRootPath}
+		layoutRootPath = {$module.tx_powermailencryption.view.layoutRootPath}
+	}
+}
+
+
+plugin.tx_powermail.settings.setup.finishers {
+
+	# Add your own finishers classes (e.g. if you want to do something with form values by your own: Save into tables, call an API, make your own redirect etc...)
+	14 {
+		# Classname that should be called with method *Finisher()
+		class = PS\PowermailEncryption\Finisher\EncryptionFinisher
+
+		# optional: Add configuration for your PHP
+		config {
+			foo = bar
+
+			fooCObject = TEXT
+			fooCObject.value = do something with this text
+		}
+
+		# optional: If file will not be loaded from autoloader, add path and it will be called with require_once
+#					require = fileadmin/powermail/finisher/DoSomethingFinisher.php
+	}
+}
+
+#plugin.tx_powermail.settings.setup.db.enable = 0
