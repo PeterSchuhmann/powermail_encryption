@@ -25,6 +25,11 @@ if (TYPO3_MODE === 'BE') {
 
 }
 
+/**
+ * add hook for reading records in backend
+ */
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['formDataGroup']['tcaDatabaseRecord']['PS\PowermailEncryption\Hooks\DatabaseEditRow'] = array('depends' => array('TYPO3\CMS\Backend\Form\FormDataProvider\DatabaseEditRow'));
+
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Powermail Encryption');
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_powermailencryption_domain_model_data', 'EXT:powermail_encryption/Resources/Private/Language/locallang_csh_tx_powermailencryption_domain_model_data.xlf');

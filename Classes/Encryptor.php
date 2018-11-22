@@ -42,6 +42,11 @@ class Encryptor
 		}
     }
 
+	public function isValueEncrypted($data)
+	{
+		return (strpos($data, '[ENC]') !== false);
+	}
+
     /**
      * Add <ENC> Tag for detect encrypted value
      * @param string $data Plain text to encrypt
@@ -52,11 +57,18 @@ class Encryptor
      */
     public function encrypt($data)
     {
-        $value = openssl_encrypt($data, $this->protocol, $this->secretKey, 0, $this->vector);
-        if ($value === false) {
-            throw new \Exception('Impossible to crypt data');
-        }
-        return '[ENC]' . $value;
+		if (!$this->isValueEncrypted($data)) {
+			$value = openssl_encrypt($data, $this->protocol, $this->secretKey, 0, $this->vector);
+		   if ($value === false) {
+			   throw new \Exception('Impossible to crypt data');
+		   }
+		   $value = '[ENC]' . $value;
+		}
+		else {
+			$value = $data;
+		}
+
+        return $value;
     }
 
     /**
@@ -69,10 +81,15 @@ class Encryptor
      */
     public function decrypt($data)
     {
-        $value = openssl_decrypt(str_replace('[ENC]', '',$data), $this->protocol, $this->secretKey, 0, $this->vector);
-        if ($value === false) {
-            throw new \Exception('Impossible to decrypt data');
-        }
+		if ($this->isValueEncrypted($data)) {
+			$value = openssl_decrypt(str_replace('[ENC]', '',$data), $this->protocol, $this->secretKey, 0, $this->vector);
+			if ($value === false) {
+				throw new \Exception('Impossible to decrypt data');
+			}
+		}
+		else {
+    		$value = $data;
+		}
         return $value;
     }
 
